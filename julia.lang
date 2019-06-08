@@ -27,6 +27,8 @@
     <property name="mimetypes" >text/x-julia;application/x-julia</property>
     <property name="globs" >*.jl</property>
     <property name="line-comment-start" >#</property>
+    <property name="block-comment-start">#=</property>
+    <property name="block-comment-end">=#</property>
   </metadata>
 
   <!--
@@ -52,6 +54,14 @@
 
   <definitions>
 
+    <context id="julia-like-comment-multiline" style-ref="def:comment" class-disabled="no-spell-check" class="def:comment" >
+      <start>#=</start>
+      <end>=#</end>
+      <include>
+        <context ref="def:in-comment"/>
+      </include>
+    </context>
+    
     <context id="string" style-ref="string" class="string" class-disabled="no-spell-check">
       <start>"</start>
       <end>"</end>
@@ -339,6 +349,7 @@
     <context id="julia" class="no-spell-check">
       <include>
         <context ref="def:shebang" />
+        <context ref="julia-like-comment-multiline" />
         <context ref="def:shell-like-comment" />
         <context ref="string" />
         <context ref="character" />
